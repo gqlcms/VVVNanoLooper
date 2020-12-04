@@ -26,6 +26,7 @@ int main(int argc, char** argv)
         ("I,job_index"   , "job_index of split jobs (--nsplit_jobs must be set. index starts from 0. i.e. 0, 1, 2, 3, etc...)"   , cxxopts::value<int>())
         ("d,debug"       , "Run debug job. i.e. overrides output option to 'debug.root' and 'recreate's the file.")
         ("w,write"       , "Write skim tree.")
+        ("f,test"       , "store some variable for test")
         ("h,help"        , "Print help")
         ("r,region"      , "Region"                                                                                              , cxxopts::value<int>())
         ;
@@ -44,6 +45,13 @@ int main(int argc, char** argv)
         exit(1);
     }
 
+    if (result.count("test")){
+        ana.test_1Lep2fatjet = true;
+    }
+    else{
+        ana.test_1Lep2fatjet = false;
+    }
+
     //_______________________________________________________________________________
     // --mode
     if (result.count("mode"))
@@ -58,6 +66,7 @@ int main(int argc, char** argv)
             case AnalysisConfig::kOS2jet: ana.looperMode = AnalysisConfig::kOS2jet; break;
             case AnalysisConfig::kSS2jet: ana.looperMode = AnalysisConfig::kSS2jet; break;
             case AnalysisConfig::k1Lep4jet: ana.looperMode = AnalysisConfig::k1Lep4jet; break;
+            case AnalysisConfig::k1Lep2fatjet: ana.looperMode = AnalysisConfig::k1Lep2fatjet; break;
         }
     }
     else

@@ -19,6 +19,9 @@ void Process_Common()
     ana.tx.setBranch<int>                  ("Common_run", nt.run());
     ana.tx.setBranch<int>                  ("Common_lumi", nt.luminosityBlock());
     ana.tx.setBranch<unsigned long long>   ("Common_evt", nt.event());
+    std::cout<<"run number of event:"<<nt.run()<<endl;
+    std::cout<<"lumi block of event:"<<nt.luminosityBlock()<<endl;
+    std::cout<<"event number of event:"<<nt.event()<<endl;
     if (not nt.isData())
     {
         ana.tx.setBranch<float>            ("Common_genWeight", nt.genWeight());
@@ -26,7 +29,7 @@ void Process_Common()
             ana.tx.setBranch<float>        ("Common_btagWeight_DeepCSVB", 1); // TODO
         else
             ana.tx.setBranch<float>        ("Common_btagWeight_DeepCSVB", nt.btagWeight_DeepCSVB());
-        ana.tx.setBranch<vector<float>>    ("Common_LHEWeight_mg_reweighting", nt.LHEWeight_mg_reweighting());
+        //ana.tx.setBranch<vector<float>>    ("Common_LHEWeight_mg_reweighting", nt.LHEWeight_mg_reweighting());
     }
     else
     {
@@ -178,12 +181,13 @@ void Process_Common()
     for (unsigned int imu = 0; imu < nt.Muon_p4().size(); ++imu)
     {
         // Selections
-        if (not (nt.Muon_mediumId()[imu])) continue; // TODO: What is Muon_mediumPromptId in NanoAOD?
-        if (not (nt.Muon_p4()[imu].pt() > 10.)) continue;
-        if (not (nt.Muon_pfRelIso04_all()[imu] < 0.25)) continue;
-        if (not (abs(nt.Muon_p4()[imu].eta()) < 2.4)) continue;
+        //if (not (nt.Muon_mediumId()[imu])) continue; // TODO: What is Muon_mediumPromptId in NanoAOD?
+        //if (not (nt.Muon_p4()[imu].pt() > 10.)) continue;
+        //if (not (nt.Muon_pfRelIso04_all()[imu] < 0.25)) continue;
+        //if (not (abs(nt.Muon_p4()[imu].eta()) < 2.4)) continue;
 
         // If passed up to here add it to the index list
+        std::cout<<"muon pt"<< nt.Muon_p4()[imu].pt()<<endl;
         ana.tx.pushbackToBranch<int>("Common_lep_idxs", imu);
         ana.tx.pushbackToBranch<int>("Common_lep_pdgid", nt.Muon_pdgId()[imu]);
         ana.tx.pushbackToBranch<LorentzVector>("Common_lep_p4", nt.Muon_p4()[imu]);
@@ -377,6 +381,7 @@ void Process_Common()
             continue;
 
         // For now, accept anything that reaches this point
+        std::cout<<"1 jet pt "<<nt.FatJet_p4()[ifatjet].Pt()<<endl;
         ana.tx.pushbackToBranch<int>("Common_fatjet_idxs", ifatjet);
         ana.tx.pushbackToBranch<LorentzVector>("Common_fatjet_p4", nt.FatJet_p4()[ifatjet]);
         ana.tx.pushbackToBranch<float>("Common_fatjet_msoftdrop", nt.FatJet_msoftdrop()[ifatjet]);

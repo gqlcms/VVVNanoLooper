@@ -19,7 +19,7 @@ void Begin_Common()
     ana.tx.createBranch<float>                ("Common_btagWeight_DeepCSVB");
 
     // EFT weightings
-    ana.tx.createBranch<vector<float>>        ("Common_LHEWeight_mg_reweighting");
+    //ana.tx.createBranch<vector<float>>        ("Common_LHEWeight_mg_reweighting");
 
     // 2016 only triggers
     ana.tx.createBranch<bool>                 ("Common_HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ"); // Lowest unprescaled
@@ -169,7 +169,9 @@ void Begin_Common()
 
     // Define selections
     // CommonCut will contain selections that should be common to all categories, starting from this cut, add cuts for this category of the analysis.
-    ana.cutflow.addCut("Wgt", [&]() { return 1; }, [&]() { if (not nt.isData()) return (nt.genWeight() > 0) - (nt.genWeight() < 0); else return 1; } );
+    //ana.cutflow.addCut("Wgt", [&]() { return 1; }, [&]() { if (not nt.isData()) return (nt.genWeight() > 0) - (nt.genWeight() < 0); else return 1; } );
+    //ana.cutflow.addCut("Wgt", [&]() { return 1; }, [&]() { if (not nt.isData()) return (nt.genWeight() > 0) + (nt.genWeight() <= 0); else return 1; } ); // stupid
+    ana.cutflow.addCut("Wgt", [&]() { return 1; }, [&]() { if (not nt.isData()) return (1); else return 1; } ); // stupid
     ana.cutflow.addCutToLastActiveCut("CommonCut", [&]() { return 1;}, [&]() { return 1; } );
 
     // Create histograms used in this category.
@@ -195,10 +197,10 @@ void Begin_Common()
     ana.cutflow.bookHistogramsForCut(n_event_hist, "Wgt");
 
     // EFT reweighting histogram
-    RooUtil::Histograms n_lhe_weight;
-    n_lhe_weight.addVecHistogram("h_Common_LHEWeight_mg_reweighting", 60, 0, 60, [&]() { std::vector<float> rtn; for (int i = 0; i < nt.LHEWeight_mg_reweighting().size(); ++i) rtn.push_back(i); return rtn; }, [&]() { std::vector<float> rtn(nt.LHEWeight_mg_reweighting().begin(), nt.LHEWeight_mg_reweighting().end()); return rtn; } );
+    //RooUtil::Histograms n_lhe_weight;
+    //n_lhe_weight.addVecHistogram("h_Common_LHEWeight_mg_reweighting", 60, 0, 60, [&]() { std::vector<float> rtn; for (int i = 0; i < nt.LHEWeight_mg_reweighting().size(); ++i) rtn.push_back(i); return rtn; }, [&]() { std::vector<float> rtn(nt.LHEWeight_mg_reweighting().begin(), nt.LHEWeight_mg_reweighting().end()); return rtn; } );
 
     // Book the EFT reweighting histogram counter
-    ana.cutflow.bookHistogramsForCut(n_lhe_weight, "Root");
+    //ana.cutflow.bookHistogramsForCut(n_lhe_weight, "Root");
 
 }

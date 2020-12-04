@@ -3,6 +3,7 @@
 
 #include "AnalysisConfig.h"
 #include "Begin_1Lep4jet.h"
+#include "Begin_1Lep2fatjet.h"
 #include "Begin_3Lep2jet.h"
 #include "Begin_3LepMET.h"
 #include "Begin_4Lep2jet.h"

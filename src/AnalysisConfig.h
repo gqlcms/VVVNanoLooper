@@ -20,6 +20,7 @@ public:
         kOS2jet,
         kSS2jet,
         k1Lep4jet,
+        k1Lep2fatjet,
     };
 
     LooperMode looperMode;
@@ -73,6 +74,9 @@ public:
 
     // Custom TTree object to use to facilitate TTree output writing
     RooUtil::TTreeX output_tx;
+
+    //For test
+    bool test_1Lep2fatjet;
 
 };
 

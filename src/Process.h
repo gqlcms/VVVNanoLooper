@@ -2,6 +2,7 @@
 #define Process_h
 
 #include "AnalysisConfig.h"
+#include "Process_1Lep2fatjet.h"
 #include "Process_1Lep4jet.h"
 #include "Process_3Lep2jet.h"
 #include "Process_3LepMET.h"
