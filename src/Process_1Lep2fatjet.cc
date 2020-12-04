@@ -153,7 +153,7 @@ void Process_1Lep2fatjet_Lepton(){
     {
         if (not (nt.Electron_cutBased_HEEP()[iel])) continue;
         if (not (nt.Electron_p4()[iel].pt()>35.0 )) continue;
-        if (not (fabs(nt.Electron_p4()[iel].eta())<2.4 )) continue;
+        if (not (fabs(nt.Electron_p4()[iel].eta())<2.5 )) continue;
         ana.tx.pushbackToBranch<int>("1Lep2fatjet_LooseElectron_cutBased_HEEP_idxs",iel);
         ana.tx.pushbackToBranch<int>("t_1Lep2fatjet_LooseElectron_cutBased_HEEP_idxs",iel);
     }
@@ -161,7 +161,7 @@ void Process_1Lep2fatjet_Lepton(){
     {
         if (not (nt.Electron_cutBased_HEEP()[iel])) continue;
         if (not (nt.Electron_p4()[iel].pt()>55.0 )) continue;
-        if (not (fabs(nt.Electron_p4()[iel].eta())<2.4 )) continue;
+        if (not (fabs(nt.Electron_p4()[iel].eta())<2.5 )) continue;
         ana.tx.pushbackToBranch<int>("1Lep2fatjet_GoodElectron_cutBased_HEEP_idxs",iel);
         ana.tx.pushbackToBranch<int>("t_1Lep2fatjet_GoodElectron_cutBased_HEEP_idxs",iel);
     }
